@@ -46,6 +46,7 @@ describe "Pages" do
 		click_link "Contact"
 		page.should have_selector('title', :text => proper_title('contact'))
 		click_link "Home"
+		page.should have_selector('title', :test => proper_title(''))
 		click_link "Sign up now!"
 		page.should have_selector('title', :text => proper_title('signup'))
 	end
