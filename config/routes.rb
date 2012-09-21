@@ -1,6 +1,8 @@
 Fauxtwitter::Application.routes.draw do
 
   root :to => 'pages#home'
+
+  resources :users
   match '/signup', :to => 'users#new' 
   match '/help',   :to => 'pages#help'
   match '/about',  :to => 'pages#about'
