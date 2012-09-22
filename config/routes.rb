@@ -1,12 +1,17 @@
 Fauxtwitter::Application.routes.draw do
 
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
   root :to => 'pages#home'
 
-  resources :users
-  match '/signup', :to => 'users#new' 
+  match '/signup', :to => 'users#new'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy', via: :delete
+
   match '/help',   :to => 'pages#help'
   match '/about',  :to => 'pages#about'
-  match 'contact', :to => 'pages#contact'
+  match '/contact', :to => 'pages#contact'
 
   #get "users/new"
   #get "pages/home"
