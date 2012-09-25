@@ -57,7 +57,7 @@ describe "Authenticationpages" do
 
       describe "in the Users controller" do
         before { visit edit_user_path(user) }
-        it { should have_selector('title', :text => 'sign in') }
+        it { should have_selector('title', :text => 'signin') }
         it { should have_selector('div.alert.alert-notice') }
       end
     end
