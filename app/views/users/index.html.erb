@@ -1,2 +1,15 @@
 <% provide(:title, "users") %>
-<h1>Users</h1>
+<h1>All Users</h1>
+
+<%= will_paginate %>
+<ul class="users">
+	<!-- <% @users.each do |user| %>
+		<!-- <%= render '/users/user', :user => user %>
+		<!-- #convention over configuration
+		#rails knows user is a User.object -- so it assumes what we're looking for
+		<%= render user %>
+	<% end %> -->
+		<%= render @users %>
+	
+</ul>
+<%= will_paginate %>
