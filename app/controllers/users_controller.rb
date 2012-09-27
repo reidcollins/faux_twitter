@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
-  before_filter :signed_in_user
+  before_filter :signed_in_user, only: [:index, :edit, :update]
+  before_filter :correct_user,   only: [:edit, :update]
+
+  def index
+    
+  end
 
   def show
   	#raise params.inspect
@@ -25,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])   
+    #@user = User.find(params[:id])   
   end
 
   def update
@@ -41,7 +46,15 @@ class UsersController < ApplicationController
 
   private
     def signed_in_user
-      flash[:notice] = "Please sign in"
-      redirect_to signin_path, :notice => "Please sign in." unless signed_in?
+      #raise signed_in?.inspect
+      unless signed_in?
+        store_location
+        redirect_to signin_path, :notice => "Please sign in." unless signed_in?
+      end
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to root_path unless current_user?(@user)
     end
 end
