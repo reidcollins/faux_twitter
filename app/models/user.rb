@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 	attr_accessible :email, :name, :password, :password_confirmation
+
+	#User.microposts.build/create methods
+	has_many :microposts, :dependent => :destroy
 	has_secure_password
 
 	before_save { |user| user.email = user.email.downcase}
@@ -11,6 +14,12 @@ class User < ActiveRecord::Base
 	validates :name,  :presence => true, :length => { :maximum => 50 }
 	validates :password, :length => { :minimum => 6 }
 	validates :password_confirmation, :presence => true
+
+	def feed
+		#this is only a protofeed
+		#self.microposts
+		Micropost.where("user_id = ?", id)
+	end
 
 	private
 
