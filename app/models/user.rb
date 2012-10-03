@@ -37,7 +37,8 @@ class User < ActiveRecord::Base
 	def feed
 		#this is only a protofeed
 		#self.microposts
-		Micropost.where("user_id = ?", id)
+		#Micropost.where("user_id = ?", id)
+		Micropost.from_users_followed_by(self)
 	end
 
 	private
